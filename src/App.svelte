@@ -11,55 +11,31 @@
 	import ItemTable from "./components/Table/ItemTable.svelte";
 	import type {IClient} from "./interfaces/client.interface";
 	import type {IInvoice} from "./interfaces/invoice.interface";
-	import type {IIssuer} from "./interfaces/issuer.interface";
 	import type {IItem} from "./interfaces/item.interface";
 
 
   // Issuer's info value
-
-  // let issuer: IIssuer = {
-  //   username :'',
-  //   address :'',
-  //   email :'',
-  //   website :'',
-  //   bankName : '',  
-  //   bankAccount :'',
-  //   bankHolder :'',
-  // };
-
-  // mock for dev
   let issuer: IIssuer = {
-    username :'Chan Die Man',
-    address :'Address is here',
-    email :'email@that.com',
-    website :'www.example.com',
-    bankName : 'Bank of Bank',  
-    bankAccount :'2203112992293',
-    bankHolder :'CHAN DIE MAN',
+    username :'',
+    address :'',
+    email :'',
+    website :'',
+    bankName : '',  
+    bankAccount :'',
+    bankHolder :'',
   };
 
-  // Client's info
-  // let client:IClient ={
-  //   clientName: '',
-  //   clientAddress: '', 
-  // }
 
-  //mock for dev
+  // Client's info
   let client:IClient ={
-    clientName: 'Lee Ka Shing',
-    clientAddress: 'His Addressccc cccccccc ccccccccc ccccccccccc cccccccc', 
+    clientName: '',
+    clientAddress: '', 
   }
 
-  // let invoice = {
-  //   invoiceNumber: '',
-  //   invoiceDate: '',
-  //   invoiceDueDate: '',
-  // }
-// Mock for dev
-  let invoice: IInvoice = {
-    invoiceNumber: '2203991184492',
-    invoiceDate: new Date().toLocaleDateString(),
-    invoiceDueDate: new Date().toLocaleDateString(), 
+  let invoice:IInvoice = {
+    invoiceNumber: '',
+    invoiceDate: '',
+    invoiceDueDate: '',
   }
 
   let items:IItem[] = [];
@@ -71,10 +47,13 @@
     totalAmount = event.detail.totalAmount
   }
 
+  const printInvoice=()=>{
+    window.print()
+  }
   </script>
 
-<main class="lg:grid grid-cols-2">
-<section class="md:grid grdi-cols-3 p-5 m-5 border-2 rounded shadow-md">
+<main class="lg:grid grid-cols-2 ">
+<section class="not-printable md:grid grdi-cols-3 p-5 m-5 border-2 rounded shadow-md ">
 <h1 class='text-center text-4xl font-extrabold mb-2'>Create your next invoice</h1>
 
   <div class='invoice-create-form md:grid grid-col-3'>
@@ -91,6 +70,7 @@
 
 </section>
 <section class="invoice-preview rounded border-2 shadow-md p-5 m-5 grid grid-cols-1 grid-rows-6">
+    <button class='not-printable bg-green-800 rounded-xl text-white h-10 w-1/3 mx-2' on:click={printInvoice}>Print</button>
     <h1 class='text-center text-4xl font-extrabold '> Invoice </h1>
     
     <!-- Print Button -->

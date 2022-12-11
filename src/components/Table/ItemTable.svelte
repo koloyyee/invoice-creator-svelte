@@ -8,8 +8,8 @@
 
 </script>
 
-<table class=' border-violet-400 border-dotted border-2 '>
-    <thead class="bg-slate-900 text-slate-100 ">
+<table class='  border-2 '>
+    <thead class="bg-slate-900 text-slate-100 border-2 border-slate-900">
         <tr>
             <th>Item Name </th>
             <th> Quantity </th>
