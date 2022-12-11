@@ -11,6 +11,7 @@
 	import ItemTable from "./components/Table/ItemTable.svelte";
 	import type {IClient} from "./interfaces/client.interface";
 	import type {IInvoice} from "./interfaces/invoice.interface";
+	import type {IIssuer} from "./interfaces/issuer.interface";
 	import type {IItem} from "./interfaces/item.interface";
 
 
