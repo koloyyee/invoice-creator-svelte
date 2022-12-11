@@ -71,7 +71,7 @@
 
 </section>
 <section class="invoice-preview rounded border-2 shadow-md p-5 m-5 grid grid-cols-1 grid-rows-6">
-    <button class='not-printable bg-green-800 rounded-xl text-white h-10 w-1/3 mx-2' on:click={printInvoice}>Print</button>
+    <button class='not-printable bg-green-800 rounded-xl text-white h-10 w-1/3 mx-2 hover:bg-transparent hover:text-green-800 hover:border-green-800 hover:border-2 transition-all' on:click={printInvoice}>Print</button>
     <h1 class='text-center text-4xl font-extrabold '> Invoice </h1>
     
     <!-- Print Button -->

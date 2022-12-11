@@ -86,6 +86,6 @@
         <input class='rounded-xl outline-0 focus:border-purple-800 focus:border-3 px-1 h-10'type="number" name="itemPrice" bind:value={item.itemPrice} />
     </div>
     
-    <button type='submit' class='bg-purple-800 rounded-xl text-white h-10 self-end mx-2'>Add Item</button>
+    <button type='submit' class='bg-purple-800 hover:bg-transparent hover:text-purple-800 hover:border-purple-800 hover:border-2 transition-all duration-300 rounded-xl text-white h-10 self-end mx-2'>Add Item</button>
 </form>
 <ItemTable items={items} editRow={editRow} deleteRow={deleteRow} inPreview={true}/>
