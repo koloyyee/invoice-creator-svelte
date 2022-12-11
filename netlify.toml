@@ -2,9 +2,9 @@
 [build]
   publish="dist"
 [dev]
- command = "npm run dev"
-  targetPort=5173
-  port=8888
+ command = "npm run preview"
+  targetPort=4173
+  port=8080
 [functions]
 node_bundler = "esbuild"
 
