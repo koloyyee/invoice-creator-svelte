@@ -21,7 +21,7 @@ export let invoiceId = "";
 
     </div>
     <!-- Invoice info -->
-    <div class='invoice-info justify-self-end'>
+    <div class='invoice-info text-sm text-right'>
         <ul>
           <li>Invoice number: {invoiceId}</li>
           <li class='bg-gray-400'>Issue date: {invoiceDate}</li>

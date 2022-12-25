@@ -7,7 +7,7 @@
 	
 </script>
 
-<div class="flex flex-col mt-3 ">
+<div class="flex flex-col mt-3">
 	<label for="invoiceId">Invoice's number</label>
 	<input
 		class="rounded-xl outline-0 focus:border-purple-800 focus:border-3 px-1 h-10 text-gray-500"

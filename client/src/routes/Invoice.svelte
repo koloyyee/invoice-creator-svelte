@@ -106,7 +106,10 @@
     </div>
   
   </section>
-  <section class="invoice-preview rounded border-2 shadow-md p-5 m-5 grid grid-cols-1 grid-rows-6 ">
+  <section class="invoice-preview rounded border-2 shadow-md p-5 m-5 
+  flex flex-col
+  gap-5
+  ">
     <div class='not-printable' >
       <Print {printInvoice}/>
       <Save {saveInvoice}/>
@@ -122,9 +125,11 @@
         <ItemTable bind:items={items}/>
   
       <!-- Total Amount -->
+      <div class='mt-auto'  >
       <TotalAmount bind:totalAmount={totalAmount} />
   
       <NotePreview bind:note={note} />
+    </div>
       <!-- Footer: Issuer's info -->
       <Footer bind:issuer={issuer} />
   </section>

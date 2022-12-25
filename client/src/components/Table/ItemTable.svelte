@@ -20,13 +20,13 @@
             <th></th>
         </tr>
     </thead>
-    <tbody>
-            {#each items as item}
-                <tr>
+    <tbody class='pt-3'>
+            {#each items as item, index}
+                <tr data-rowId={index} >
                     <td>{item.itemName}</td> 
                     <td class=''>{item.itemQuantity}</td> 
                     <td>${item.itemPrice}</td> 
-                    <td class=''>${item.itemSubtotal}</td>
+                    <td class=''>${item.itemSubtotal.toFixed(2)}</td>
                     {#if inPreview }
                     <td><button on:click={()=>editRow(item.id)}>Edit</button></td>
                     <td><button on:click={()=>deleteRow(item.id)}>Delete</button></td>
@@ -36,5 +36,4 @@
     </tbody>
 </table>
 <style>
-
 </style>

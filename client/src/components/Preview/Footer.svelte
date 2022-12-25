@@ -11,7 +11,7 @@
 
 </script>
 
-<footer class='footer mt-10 border-t-2 border-t-gray-800 '>
+<footer class='footer border-t-2 border-t-gray-800 mt-auto'>
     <ul class='flex gap-3 flex-wrap place-content-center mt-5'>
         <li>Name: <span class="footer-info">{issuer.username}</span></li>
         <li>Address: <span class="footer-info"> {issuer.address}</span></li>
