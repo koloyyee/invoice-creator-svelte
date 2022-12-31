@@ -119,14 +119,12 @@
       <Print {printInvoice}/>
       <Save {saveInvoice}/>
     </div>
-    <section class="flex justify-between">
+  <section class="flex justify-between">
       <Issuer bind:issuer={issuer} />
 
       <h1 class='text-right text-4xl font-extrabold '> Invoice </h1>
     </section>
       
-      <!-- Print Button -->
-        <!-- Client's info -->
       <ClientInfoPreview 
       bind:invoiceId={invoiceId} 
       bind:invoiceDate={invoiceDate} 
@@ -134,11 +132,9 @@
       bind:client={client}
       bind:status={status}
        />
-      <!-- Item list -->
       
         <ItemTable bind:items={items}/>
-  
-      <!-- Total Amount -->
+
       <div class='mt-auto'  >
       <TotalAmount bind:totalAmount={totalAmount} />
   

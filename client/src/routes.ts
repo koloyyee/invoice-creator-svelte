@@ -1,4 +1,5 @@
 import { wrap } from 'svelte-spa-router/wrap';
+import SingleInvoice from './routes/Invoice/SingleInvoice.svelte';
 
 export default { 
     '/auth': wrap({
@@ -10,7 +11,8 @@ export default {
     '/invoice/new': wrap({
         asyncComponent: ()=> import('./routes/Invoice/NewInvoice.svelte')
     }),
-    '/invoice/:invoiceId': wrap({
-        asyncComponent: ()=> import('./routes/Invoice/SingleInvoice.svelte')
-    })
+    // '/invoice/:invoiceId': wrap({
+    //     asyncComponent: ()=> import('./routes/Invoice/SingleInvoice.svelte')
+    // })
+    '/invoice/:invoiceId': SingleInvoice,
 }
