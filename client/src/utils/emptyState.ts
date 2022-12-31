@@ -1,4 +1,4 @@
-import type { IInvoice } from "./interfaces/invoice.interface";
+import { InvoiceStatus, type IInvoice } from "../interfaces/invoice.interface";
 
 export let invoice: IInvoice = {
     invoiceId: new Date().valueOf().toString(),
@@ -19,5 +19,6 @@ export let invoice: IInvoice = {
     },
     items: [],
     note: '',
-    totalAmount: 0
+    totalAmount: 0,
+    status: InvoiceStatus.NOT_PAID
 }

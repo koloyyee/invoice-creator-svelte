@@ -10,7 +10,7 @@
 
 <table class='table-auto py-2 mx-0 text-sm
  lg:text-base w-full'>
-    <thead class=" text-slate-900  h-1  border-b-slate-600 border-b-2">
+    <thead class=" h-1  border-b-slate-600 border-b-2">
         <tr>
             <th>Item Name </th>
             <th> Quantity </th>

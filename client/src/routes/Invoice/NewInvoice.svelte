@@ -1,21 +1,20 @@
 <script lang="ts">
 
-    import Print from "../components/Buttons/Print.svelte";
-    import Save from "../components/Buttons/Save.svelte";
+    import Print from "../../components/Buttons/Print.svelte";
+    import Save from "../../components/Buttons/Save.svelte";
       
-      import ClientInfo from "../components/Form/ClientInfo.svelte";
-      import Dates from "../components/Form/Dates.svelte";
-      import IssuerInfo from "../components/Form/IssuerInfo.svelte";
-      import Note from "../components/Form/Note.svelte";
-      import ClientInfoPreview from "../components/Preview/ClientInfo.svelte";
-      import Footer from "../components/Preview/Footer.svelte";
-      import NotePreview from "../components/Preview/Note.svelte";
-      import TotalAmount from "../components/Preview/TotalAmount.svelte";
-      import ItemInputs from "../components/Table/ItemInputs.svelte";
-      import ItemTable from "../components/Table/ItemTable.svelte";
-      import { invoice } from "../emptyState";
-      import { additionalNote } from "../store";
-  
+      import ClientInfo from "../../components/Form/ClientInfo.svelte";
+      import Dates from "../../components/Form/Dates.svelte";
+      import IssuerInfo from "../../components/Form/IssuerInfo.svelte";
+      import Note from "../../components/Form/Note.svelte";
+      import ClientInfoPreview from "../../components/Preview/ClientInfo.svelte";
+      import Issuer from "../../components/Preview/Issuer.svelte";
+      import NotePreview from "../../components/Preview/Note.svelte";
+      import TotalAmount from "../../components/Preview/TotalAmount.svelte";
+      import ItemInputs from "../../components/Table/ItemInputs.svelte";
+      import ItemTable from "../../components/Table/ItemTable.svelte";
+      import { additionalNote } from "../../store";
+      import { invoice } from "../../utils/emptyState";
   
   
     
@@ -29,6 +28,7 @@
       items,
       note,
       totalAmount,
+      status
     } = invoice;
   
     additionalNote.subscribe(value => {
@@ -83,8 +83,8 @@
         client.clientName= ''
         client.clientAddress= ''
         items = []
-        invoice.note= ''
-        invoice.totalAmount= 0
+        note= ''
+        totalAmount= 0
       
     }
     </script>
@@ -92,14 +92,19 @@
   <section class="not-printable md:grid grdi-cols-3 p-5 m-5 border-2 rounded shadow-md w-50">
   <h1 class='text-center text-4xl font-extrabold mb-2'>Create your next invoice</h1>
   
-    <div class='invoice-create-form lg:grid grid-col-3'>
-      <IssuerInfo bind:issuer={issuer}/> 
-  
-      <div class='lg:grid grid-cols-2 gap-2 my-5 border-t-2 border-t-gray-600'>
-        <ClientInfo bind:client={client}/>
-        <Dates bind:invoiceId={invoiceId} bind:invoiceDate={invoiceDate} bind:invoiceDueDate={invoiceDueDate}/>
-      </div>
-      
+  <div class='invoice-create-form lg:grid grid-col-3'>
+      <section class="issuer-section border-b-2 border-b-gray-600 pb-5">
+          <h3 class='font-extrabold'>Issue Company Info.</h3>
+
+          <IssuerInfo bind:issuer={issuer}/> 
+      </section>
+      <section class="issuer-section border-b-2 border-b-gray-600  pb-5">  
+        <h3 class='font-extrabold'>Client Company & Invoice Info.</h3>
+        <div class='lg:grid grid-cols-2 gap-2  '>
+          <ClientInfo bind:client={client}/>
+          <Dates bind:invoiceId={invoiceId} bind:invoiceDate={invoiceDate} bind:invoiceDueDate={invoiceDueDate} bind:status={status} />
+        </div>
+    </section>
       <ItemInputs bind:items={items} on:setTotalAmount={setTotalAmount}/>
       
       <Note bind:note={note} />
@@ -114,12 +119,21 @@
       <Print {printInvoice}/>
       <Save {saveInvoice}/>
     </div>
-      
-      <h1 class='text-center text-4xl font-extrabold '> Invoice </h1>
+    <section class="flex justify-between">
+      <Issuer bind:issuer={issuer} />
+
+      <h1 class='text-right text-4xl font-extrabold '> Invoice </h1>
+    </section>
       
       <!-- Print Button -->
         <!-- Client's info -->
-      <ClientInfoPreview bind:invoiceId={invoiceId} bind:invoiceDate={invoiceDate} bind:invoiceDueDate={invoiceDueDate} bind:client={client} />
+      <ClientInfoPreview 
+      bind:invoiceId={invoiceId} 
+      bind:invoiceDate={invoiceDate} 
+      bind:invoiceDueDate={invoiceDueDate} 
+      bind:client={client}
+      bind:status={status}
+       />
       <!-- Item list -->
       
         <ItemTable bind:items={items}/>
@@ -130,8 +144,6 @@
   
       <NotePreview bind:note={note} />
     </div>
-      <!-- Footer: Issuer's info -->
-      <Footer bind:issuer={issuer} />
   </section>
   
   

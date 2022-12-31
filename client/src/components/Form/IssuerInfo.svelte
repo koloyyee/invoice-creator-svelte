@@ -8,6 +8,17 @@
 		bankAccount: "",
 		bankHolder: "",
 	};
+
+	let logo, fileInput; 
+	const onFileSelected = (e) => {
+		let image = e.target.files[0];
+		let reader = new FileReader();
+		reader.readAsDataURL(image);
+		reader.onload = e => {
+			logo = e.target.result
+		};
+		console.log(logo)
+	}
 </script>
 
 <div class="lg:grid grid-cols-2 gap-2">
@@ -83,7 +94,7 @@
 		</div>
 
 		<div class="flex flex-col">
-			<label for="bankHolder"> Bank holder name:</label>
+			<label for="bankHolder"> Holder's name:</label>
 			<input
 				class="rounded-xl outline-0 focus:border-purple-800 focus:border-3 px-1 h-10"
 				type="text"
@@ -93,5 +104,24 @@
 				required
 			/>
 		</div>
+		<div class="">
+			<div class="upload cursor-pointer" on:click={()=>fileInput.click()}> Upload Logo</div>
+			<input
+				class="hidden fileInput px-1 h-10"
+				type="file"
+				accept=".jpg, .jpeg, .png"
+				name="bankHolder"
+				id="bankHolder"
+				on:change={(e)=> onFileSelected(e)}
+				bind:this = {fileInput}
+
+			/>
+		</div>
 	</div>
 </div>
+
+<style>
+	.fileInput {
+		border: none;
+	}
+</style>

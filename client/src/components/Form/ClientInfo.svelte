@@ -9,8 +9,8 @@ export let client: IClient ={
 
 <div class='flex flex-col mt-3'>
 
-    <label for="clientName">Client's name</label>
+    <label for="clientName">Name</label>
     <input class="rounded-xl outline-0 focus:border-purple-800 focus:border-3 px-1 h-10" type="text" name="clientName" id="clientName" bind:value={client.clientName} required>
-    <label for="clientAddress">Client's address</label>
+    <label for="clientAddress">Address</label>
     <input class="rounded-xl outline-0 focus:border-purple-800 focus:border-3 px-1 h-10" type="text" name="clientAddress" id="clientAddress" bind:value={client.clientAddress} required>
 </div>

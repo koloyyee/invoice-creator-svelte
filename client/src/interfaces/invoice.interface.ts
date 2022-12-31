@@ -11,4 +11,20 @@ export interface IInvoice {
     items: IItem[];
     note?: string;
     totalAmount: number;
+    status: string;  // <-- about to add to the interface and the invoice.
 }
+
+export type InvoiceTableType = {
+    invoiceId: string;
+    clientName: IClient['clientName'];
+    invoiceDueDate: string;
+    totalAmount: number;
+
+}
+
+export const InvoiceStatus = Object.freeze({
+    NOT_PAID: 'Not Paid',
+    PAID: 'Paid',
+    // ACTIVE: 'Active',
+    VOID:'Void'
+})

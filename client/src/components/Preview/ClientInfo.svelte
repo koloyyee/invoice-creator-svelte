@@ -1,31 +1,37 @@
 <script lang='ts'>
 	import type { IClient } from "../../interfaces/client.interface";
+	import type { IInvoice } from "../../interfaces/invoice.interface";
 	
 
 
-export let client: IClient ={
-    clientName: '',
-    clientAddress: '',
-}
+  export let client: IClient ={
+      clientName: '',
+      clientAddress: '',
+  }
+  export let status: IInvoice['status'];
 
 
-export let invoiceId = "";
+  export let invoiceId = "";
 	export let invoiceDate = new Date().toLocaleDateString();
 	export let 	invoiceDueDate = new Date().toLocaleDateString();
+
+
 
 </script>
 <article class='info-section grid grid-cols-2'>
     <div class='client-info'>
+      <h5> Bill to:</h5>
       <h3 class='font-bold text-2xl'> {client.clientName}</h3>
-      <p class=' break-all w-2/3'>{client.clientAddress}</p>
+      <p class=' w-2/3'>{client.clientAddress}</p>
 
     </div>
     <!-- Invoice info -->
     <div class='invoice-info text-sm text-right'>
         <ul>
-          <li>Invoice number: {invoiceId}</li>
-          <li class='bg-gray-400'>Issue date: {invoiceDate}</li>
-          <li>Due date: {invoiceDueDate}</li>
+          <li>Invoice status: <span class='status font-bold underline underline-offset-4 {status === 'Paid'? 'text-green-600' : status === 'Not Paid' ? 'text-red-600' : 'text-orange-400'}'>{status}</span> </li>
+          <li>Invoice number:  <span class='status font-bold underline underline-offset-4'>{invoiceId}</span></li>
+          <li >Issue date:  <span class='status font-bold underline underline-offset-4'> {invoiceDate}</span></li>
+          <li>Due date:  <span class='status font-bold underline underline-offset-4'>{invoiceDueDate}</span></li>
         </ul>
     </div>
   </article>

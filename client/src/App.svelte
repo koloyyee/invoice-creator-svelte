@@ -1,15 +1,24 @@
 <script lang="ts">
 
   
-	import Router, { link } from "svelte-spa-router";
+	import Router from "svelte-spa-router";
+	import Menu from "./components/Nav/Menu.svelte";
 	import routes from "./routes";
+	import { isLoggedIn } from "./store";
+
+	let isIn:boolean;
+	isLoggedIn.subscribe( auth => isIn = auth )
 
   </script>
 
-<main class="sm:grid lg:grid grid-cols-2 ">
-  <Router {routes}/>
-  <a class='not-printable' href="/invoice/new" use:link>Create New Invoice</a>
-</main>
+<body class="flex">
+	<!-- {#if isIn} -->
+		<Menu />
+	<!-- {/if} -->
+		<main class="sm:grid lg:grid grid-cols-2 ">
+			<Router {routes}/>
+		</main>
+</body>
 
 <style>
 	main {

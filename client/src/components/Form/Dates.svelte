@@ -1,9 +1,13 @@
 <script lang="ts">
-	
+	import type { IInvoice } from "../../interfaces/invoice.interface";
+	import { InvoiceStatus } from '../../interfaces/invoice.interface';
 
 	export let invoiceId = "";
 	export let invoiceDate = new Date().toLocaleDateString();
 	export let 	invoiceDueDate = new Date().toLocaleDateString();
+	export let status: IInvoice['status'];
+
+	const statusEnum = Array(Object.freeze(InvoiceStatus));
 	
 </script>
 
@@ -38,4 +42,13 @@
 		bind:value={invoiceDueDate}
 		required
 	/>
+
+	<label for="invoiceDueDate">Invoice status</label>
+	<select class='rounded-xl outline-0 focus:border-purple-800 focus:border-3 px-1 h-10 ' name="status" id="" bind:value={status}>
+		{#each statusEnum as statusE}
+			<option value={statusE.NOT_PAID}>{statusE.NOT_PAID}</option>
+			<option value={statusE.PAID}>{statusE.PAID}</option>
+			<option value={statusE.VOID}>{statusE.VOID}</option>
+		{/each}
+	</select>
 </div>

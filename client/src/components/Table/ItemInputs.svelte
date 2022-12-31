@@ -1,15 +1,20 @@
 <script lang='ts'>
     import { createEventDispatcher } from 'svelte';
+    import { v4 as uuid } from 'uuid';
+    import Add from '../Buttons/Add.svelte';
     import ItemTable from './ItemTable.svelte';
+
 
     const dispatch = createEventDispatcher();
     
 	export let item = {
+        id: uuid(),
 		itemName: "",
 		itemPrice: 0,
 		itemQuantity: 0,
 		itemSubtotal: 0,
 	};
+    
     $: subtotal = 0;
     export let items=[];
     export let totalAmount = 0;
@@ -37,6 +42,7 @@
         setTotalAmount();
         
         item = {
+            id: uuid(),
             itemName: "",
             itemPrice: 0,
             itemQuantity: 0,
@@ -47,7 +53,9 @@
 
 
     function editRow(id:string){
+
             let editingRow = items.find(item => item.id === id)
+                
             item = {
                 ...item,
                 itemName : editingRow.itemName,
@@ -60,7 +68,6 @@
 
         }
     const deleteRow= ( id: string) =>{
-
             items = items.filter(item=> item.id !== id)
         }
 </script>
@@ -85,8 +92,6 @@
         bind:value={item.itemPrice} required />
     </div>
     
-    <button type='submit' 
-    class='bg-purple-800 hover:bg-transparent hover:text-purple-800 hover:border-purple-800 hover:border-2 transition-all duration-300 rounded-xl text-white h-10 self-end  text-2xl
-    my-2 px-2 md:text-sm md:my-0'>Add Item</button>
+   <Add /> 
 </form>
 <ItemTable items={items} editRow={editRow} deleteRow={deleteRow} inPreview={true}/>
