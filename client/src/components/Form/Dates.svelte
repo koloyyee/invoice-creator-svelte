@@ -2,9 +2,9 @@
 	import type { IInvoice } from "../../interfaces/invoice.interface";
 	import { InvoiceStatus } from '../../interfaces/invoice.interface';
 
-	export let invoiceId = "";
-	export let invoiceDate = new Date().toLocaleDateString();
-	export let 	invoiceDueDate = new Date().toLocaleDateString();
+	export let invoiceId: string;
+	export let invoiceDate: string;
+	export let 	invoiceDueDate: string;
 	export let status: IInvoice['status'];
 
 	const statusEnum = Array(Object.freeze(InvoiceStatus));

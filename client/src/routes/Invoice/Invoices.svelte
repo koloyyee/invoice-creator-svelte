@@ -1,5 +1,5 @@
 <script lang='ts'>
-	import { createSvelteTable, flexRender, getCoreRowModel, type ColumnDef, type Table, type TableOptions } from "@tanstack/svelte-table";
+	import { createSvelteTable, flexRender, getCoreRowModel, getSortedRowModel, type ColumnDef, type Table, type TableOptions } from "@tanstack/svelte-table";
 	import { writable, type Readable } from "svelte/store";
 
   
@@ -51,12 +51,36 @@
           header: ()=> 'Payment Status',
 
       },
+
       ];
+
+      let sorting =[];
+
+      const setSorting = updater => {
+        if (updater instanceof Function) {
+          sorting = updater(sorting)
+        } else {
+          sorting = updater
+        }
+        options.update( old => ({
+          ...old,
+          state: {
+            ...old.state,
+            sorting
+          }
+        }))
+      }
   
       const options  = writable<TableOptions<IInvoice>>({
           data: defaultData,
           columns: defaultColumns,
+          state: {
+            sorting
+          },
+          onSortingChange: setSorting,
           getCoreRowModel: getCoreRowModel(),
+          getSortedRowModel: getSortedRowModel(),
+          debugTable: true,
       })
 
        table = createSvelteTable(options);
@@ -68,7 +92,7 @@
     let getInvoices = fetchInvoices();
   </script>
 {#await getInvoices }
-  no shit
+  ...loading...
 {:then $table}
 <section class='grid font-extrabold text-3xl pt-10 h-screen grid-rows-[repeat(12,_1fr)] gap-5'> 
     <h1 class=''> Invoice Records</h1>
@@ -78,14 +102,20 @@
         {#each $table.getHeaderGroups() as headerGroup}
           <tr>
             {#each headerGroup.headers as header}
-              <th scope="col" class="px-6 bg-blueGray-50 text-blueGray-500 align-middle border border-solid border-blueGray-100 py-3 text-xs uppercase border-l-0 border-r-0 whitespace-nowrap font-semibold text-left">
+              <th colSpan={header.colSpan} scope="col" class="px-6 bg-blueGray-50 text-blueGray-500 align-middle border border-solid border-blueGray-100 py-3 text-xs uppercase border-l-0 border-r-0 whitespace-nowrap font-semibold text-left">
                 {#if !header.isPlaceholder}
-                  <svelte:component
-                    this={flexRender(
-                      header.column.columnDef.header,
-                      header.getContext()
-                    )}
-                  />
+                <!-- svelte-ignore a11y-click-events-have-key-events -->
+                <div
+                class:cursor-pointer={header.column.getCanSort()}
+                class:select-none={header.column.getCanSort()}
+                on:click={header.column.getToggleSortingHandler()}
+                >
+                <svelte:component this={flexRender(header.column.columnDef.header, header.getContext())} />
+                <!-- {{
+                  asc: ' 🔼',
+                  desc: ' 🔽',
+                }[header.column.getIsSorted().toString()] ?? ''} -->
+                  </div>
                 {/if}
               </th>
             {/each}

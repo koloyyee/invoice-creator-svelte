@@ -1,7 +1,7 @@
 <script lang='ts'>
     import { createEventDispatcher } from 'svelte';
     import { v4 as uuid } from 'uuid';
-    import Add from '../Buttons/Add.svelte';
+    import Add from '../Buttons/AddItem.svelte';
     import ItemTable from './ItemTable.svelte';
 
 

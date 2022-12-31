@@ -14,9 +14,10 @@
 </script>
 
 <MobileMenu {toggleMenu}/>
-<nav class='not-printable text-white bg-slate-900  text-xl pt-24 pl-5 
+<nav class='not-printable text-white bg-slate-900  text-xl pt-24 pl-5
 top-0 bottom-0 right-0 p-2
 fixed
+
 hidden
 lg:left-0
 lg:right-3/4

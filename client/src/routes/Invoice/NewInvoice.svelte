@@ -1,7 +1,6 @@
 <script lang="ts">
-
-    import Print from "../../components/Buttons/Print.svelte";
-    import Save from "../../components/Buttons/Save.svelte";
+	import BlueBtn from "../../components/Buttons/BlueBtn.svelte";
+	import GreenBtn from "../../components/Buttons/GreenBtn.svelte";
       
       import ClientInfo from "../../components/Form/ClientInfo.svelte";
       import Dates from "../../components/Form/Dates.svelte";
@@ -15,8 +14,6 @@
       import ItemTable from "../../components/Table/ItemTable.svelte";
       import { additionalNote } from "../../store";
       import { invoice } from "../../utils/emptyState";
-  
-  
     
     // Issuer's info value
     let {
@@ -34,6 +31,8 @@
     additionalNote.subscribe(value => {
       invoice.note = value;
     });
+
+
   
   
     function setTotalAmount(event){
@@ -116,8 +115,8 @@
   gap-5
   ">
     <div class='not-printable' >
-      <Print {printInvoice}/>
-      <Save {saveInvoice}/>
+      <GreenBtn func={printInvoice} text={'Print'}/>
+      <BlueBtn func={saveInvoice} text={'Save'}/>
     </div>
   <section class="flex justify-between">
       <Issuer bind:issuer={issuer} />

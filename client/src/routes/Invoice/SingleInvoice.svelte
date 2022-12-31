@@ -1,14 +1,15 @@
 
 <script lang='ts'>
 	import { onMount } from "svelte";
+	import BlueBtn from "../../components/Buttons/BlueBtn.svelte";
+	import GreenBtn from "../../components/Buttons/GreenBtn.svelte";
+	import RedBtn from "../../components/Buttons/RedBtn.svelte";
 	import type { IInvoice } from "../../interfaces/invoice.interface";
+	import Form from "./Form.svelte";
 	import PreviewInvoice from "./PreviewInvoice.svelte";
 
-          
-        
-
     let invoice: IInvoice;
-
+    $: isEditing = false;
     export let params = { invoiceId: ''};
 
     onMount(async()=>{
@@ -20,60 +21,62 @@
 
 
 
-    // const printInvoice=()=>{
-    //   window.print()
-    // }
+    const printInvoice=()=>{
+      window.print()
+    }
+
+    const editInvoice = () =>{
+      isEditing = !isEditing;
+    }
   
-    // const saveInvoice= async ()=> {
-    //   if(
-    //     issuer.username === '' ||  issuer.email === '' || 
-    //     issuer.bankName === '' || issuer.bankHolder === '' || 
-    //     issuer.bankAccount === '' || issuer.address === '' ||
-    //     client.clientName === '' || client.clientAddress === '' ||
-    //     items.length === 0 || totalAmount === 0
-    //     ) return;
+    const updateInvoice= async ()=> {
+      if(
+        invoice.issuer.username === '' ||  invoice.issuer.email === '' || 
+        invoice.issuer.bankName === '' || invoice.issuer.bankHolder === '' || 
+        invoice.issuer.bankAccount === '' || invoice.issuer.address === '' ||
+        invoice.client.clientName === '' || invoice.client.clientAddress === '' ||
+        invoice.items.length === 0 || invoice.totalAmount === 0
+        ) return;
   
-    // //   additionalNote.set(note)
-  
-    //   try{
-    //     const res = await fetch(`${import.meta.env.VITE_BACKEND_API}/invoices`, {
-    //     method: "POST",
-    //     headers: {'Content-type': 'application/json'},
-    //     body: JSON.stringify(invoice)
-    //     })
-    //     console.log(res.status)
-    //   } catch(error) {
-    //     console.log(error.message)
-    //   } 
-  
+    //   additionalNote.set(note)
       
-    //     invoiceId= new Date().valueOf().toString()
-    //     invoiceDate = new Date().toLocaleDateString()
-    //     invoiceDueDate = new Date().toLocaleDateString()
-    //     issuer.username = ''
-    //     issuer.address =''
-    //     issuer. email =''
-    //     issuer.website =''
-    //     issuer.bankName = '' 
-    //     issuer.bankAccount =''
-    //     issuer.bankHolder =''
-    //     client.clientName= ''
-    //     client.clientAddress= ''
-    //     items = []
-    //     note= ''
-    //     totalAmount= 0
-      
-    // }
+      console.log(invoice)
+  
+      try{
+        const res = await fetch(`${import.meta.env.VITE_BACKEND_API}/invoices/${invoice.invoiceId}`, {
+        method: "PATCH",
+        headers: {'Content-type': 'application/json'},
+        body: JSON.stringify(invoice)
+        })
+        console.log(res.status)
+      } catch(error) {
+        console.log(error.message)
+      } 
+      isEditing = false;
+    }
 
 
 </script>
-
-<section class="invoice-preview rounded border-2 shadow-md p-5 m-5 
-flex flex-col
-gap-5 h-screen
-">
 {#if invoice}
-    <PreviewInvoice invoice={invoice} />
-{/if}
+  {#if isEditing}
+    <Form bind:invoice={invoice}/>
+  {/if}
 
-</section>
+    <section class="invoice-preview rounded border-2 shadow-md p-5 m-5 
+    flex flex-col
+    gap-5 h-screen
+    ">
+      <div class='not-printable flex justify-center' >
+          <GreenBtn func={printInvoice} text={'Print'}/>
+          {#if isEditing}
+            <BlueBtn func={updateInvoice} text={'Update'}/>
+            <RedBtn func={editInvoice} text={'Cancel'}/>
+            {:else }
+            <BlueBtn func={editInvoice} text={'Edit'}/>
+            {/if}
+        </div>
+        <PreviewInvoice invoice={invoice} />
+        
+    </section>
+  
+{/if}
