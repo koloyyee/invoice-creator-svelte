@@ -5,6 +5,7 @@
 	import GreenBtn from "../../components/Buttons/GreenBtn.svelte";
 	import RedBtn from "../../components/Buttons/RedBtn.svelte";
 	import type { IInvoice } from "../../interfaces/invoice.interface";
+	import { additionalNote } from "../../store";
 	import Form from "./Form.svelte";
 	import PreviewInvoice from "./PreviewInvoice.svelte";
 
@@ -38,10 +39,8 @@
         invoice.items.length === 0 || invoice.totalAmount === 0
         ) return;
   
-    //   additionalNote.set(note)
+      additionalNote.set(invoice.note)
       
-      console.log(invoice)
-  
       try{
         const res = await fetch(`${import.meta.env.VITE_BACKEND_API}/invoices/${invoice.invoiceId}`, {
         method: "PATCH",
@@ -63,8 +62,7 @@
   {/if}
 
     <section class="invoice-preview rounded border-2 shadow-md p-5 m-5 
-    flex flex-col
-    gap-5 h-screen
+    flex flex-col 
     ">
       <div class='not-printable flex justify-center' >
           <GreenBtn func={printInvoice} text={'Print'}/>

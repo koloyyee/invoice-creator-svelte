@@ -15,7 +15,6 @@ export class InvoicesService {
     console.log(mongoose.connection.readyState);
 
     const createInvoice = await this.invoiceModel.create(createInvoiceDto);
-    console.log(createInvoice);
     return createInvoice;
   }
 
@@ -30,11 +29,10 @@ export class InvoicesService {
   async updateOne(
     invoiceId: string,
     updateInvoiceDto: UpdateInvoiceDto,
-  ): Promise<IInvoice> {
-    return this.invoiceModel.findOneAndUpdate(
+  ): Promise<void> {
+    this.invoiceModel.findOneAndUpdate(
       { invoiceId: invoiceId },
       updateInvoiceDto,
-      { upsert: true },
       function (err, doc) {
         if (err) return console.log(err.message);
         return console.log(`success`);
@@ -54,5 +52,12 @@ export class InvoicesService {
 
   async deleteOne(invoiceId: string) {
     return this.invoiceModel.deleteOne({ invoiceId: invoiceId });
+  }
+
+  async countStatus(): Promise<number> {
+    const paidCount = await this.invoiceModel.aggregate([
+      { $match: { status: 'Paid' } },
+    ]);
+    return paidCount.length;
   }
 }

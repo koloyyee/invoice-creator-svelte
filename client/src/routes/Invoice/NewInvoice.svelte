@@ -33,8 +33,6 @@
     });
 
 
-  
-  
     function setTotalAmount(event){
       totalAmount = event.detail.totalAmount
       invoice.items = items;

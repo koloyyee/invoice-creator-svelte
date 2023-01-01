@@ -24,18 +24,20 @@
 </body>
 
 <style>
-	html{
-		height: 100vh;
-
+	*{
+		height:100%;
 	}
 	main {
 		padding:0;
 		margin: 0 auto;
+
 	}
 	
 	@media (min-width: 640px) {
 		main {
 			max-width: none;
+		height: 100%;
+
 		}
 
 	}

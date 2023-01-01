@@ -84,7 +84,12 @@
       })
 
        table = createSvelteTable(options);
-       
+        const paid = defaultData.filter(value => value.status === 'Paid').length
+        const notPaid = defaultData.filter(value => value.status === 'Not paid').length
+        const voided = defaultData.filter(value => value.status === 'Void').length
+
+        console.log(paid, notPaid, voided)
+
        return $table;
     }
 

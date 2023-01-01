@@ -14,6 +14,7 @@ import { InvoicesService } from './invoices.service';
 @Controller('invoices')
 export class InvoicesController {
   constructor(private invoiceService: InvoicesService) {}
+
   @Get()
   async findAll(): Promise<IInvoice[]> {
     return this.invoiceService.findAll();
@@ -36,10 +37,10 @@ export class InvoicesController {
     return this.invoiceService.updateOne(params.invoiceId, updateInvoiceDto);
   }
 
-  @Patch('')
-  async updateMany() {
-    return this.invoiceService.updateMany();
-  }
+  // @Patch('')
+  // async updateMany() {
+  //   return this.invoiceService.updateMany();
+  // }
 
   @Delete(':invoiceId')
   async delete(@Param() params) {

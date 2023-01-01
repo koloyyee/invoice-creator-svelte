@@ -20,7 +20,7 @@
 </script>
 <article class='info-section grid grid-cols-2'>
     <div class='client-info'>
-      <h5> Bill to:</h5>
+      <h5 class='font-bold mt-2 text-sm'> Bill to:</h5>
       <h3 class='font-bold text-2xl'> {client.clientName}</h3>
       <p class=' w-2/3'>{client.clientAddress}</p>
 

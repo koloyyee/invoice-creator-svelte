@@ -60,7 +60,7 @@ class Item {
 export const ItemSchema = SchemaFactory.createForClass(Item);
 
 enum InvoiceStatus {
-  NOT_PAID = 'Not Paid',
+  NOT_PAID = 'Not paid',
   PAID = 'Paid',
   ACTIVE = 'Active',
   VOID = 'Void',

@@ -12,7 +12,7 @@
 </script>
 
 <div class='issuer '>
-    <h2> From: </h2>
+    <h2 class='font-bold mt-2 text-sm'> From: </h2>
     <h2 class="text-lg font-bold mb-1">{issuer.username}</h2>
     <ul>
         <li>{issuer.address}</li>
