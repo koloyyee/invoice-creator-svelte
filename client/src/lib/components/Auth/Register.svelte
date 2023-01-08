@@ -71,8 +71,8 @@
 		},
 		warn: (values) => {
 			const warnings = {};
-			if (values.password !== values.confirmPassword) {
-				warnings.password = "The password needs to be the same.";
+			if (values.user.password !== values.user.confirmPassword) {
+				warnings.user.password = "The password needs to be the same.";
 			}
 			return warnings;
 		},
