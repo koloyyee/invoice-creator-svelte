@@ -1,0 +1,143 @@
+<script>
+	import { validator } from "@felte/validator-zod";
+	import { createForm } from "felte";
+	import { push } from 'svelte-spa-router';
+	import { z } from "zod";
+	import AuthBtn from "../Buttons/AuthBtn.svelte";
+	import HasAccount from "./HasAccount.svelte";
+
+	const schema = z.object({
+		username: z.string(),
+		email: z.string().email({ message: "Invalid email address." }),
+		password: z
+			.string()
+			.min(8, { message: "Must be 8 or more characters long." }),
+		confirmPassword: z.string().min(8),
+	});
+
+	const warningSchema = z
+		.object({
+			password: z
+				.string()
+				.refine((value) => (value ? value.length > 8 : true), {
+					message: "Password not secure",
+				}),
+
+			confirmPassword: z
+				.string()
+				.refine((value) => (value ? value.length > 8 : true), {
+					message: "Password not secure",
+				}),
+		})
+		.superRefine(({ confirmPassword, password }, ctx) => {
+			if (confirmPassword !== password) {
+				ctx.addIssue({
+					code: "custom",
+					message: "The passwords did not match.",
+				});
+			}
+		});
+
+	const { form, errors, data } = createForm({
+		initialValues: {
+            user : {
+                id: self.crypto.randomUUID(),
+                username: "",
+                password: "",
+                confirmPassword: "",
+                email: "",
+                }
+		},
+
+		onSubmit: async (values, {resetField}) => {
+			if (values.user.password !== values.user.confirmPassword) return;
+			try {
+				const res = await fetch(`${import.meta.env.VITE_BACKEND_API}/users`, {
+					method: "POST",
+					headers: {
+						"Content-type": "application/json",
+					},
+					body: JSON.stringify(values.user),
+				});
+                if(res.status === 201){
+                    resetField('user')
+                    push('/')
+                }
+
+			} catch (e) {
+                console.error( e.message)
+            }
+
+		},
+		warn: (values) => {
+			const warnings = {};
+			if (values.user.password !== values.user.confirmPassword) {
+				warnings.user.password = "The password needs to be the same.";
+			}
+			return warnings;
+		},
+
+		extend: [
+			validator({ schema: schema }),
+			validator({ schema: warningSchema, level: "warning" }),
+		],
+	});
+</script>
+
+<form
+	use:form
+	class="shadow-md border-2 
+flex flex-col 
+justify-center items-center
+w-72 p-10 rounded"
+>
+	<label for="username">
+		Username:
+		<input
+			class="error rounded"
+			type="text"
+			name="username"
+			id="username"
+            bind:value={$data.user.username}
+			required
+		/>
+	</label>
+	<label for="password">
+		Password:
+		<input
+			class="error rounded"
+			type="password"
+			name="password"
+			id="password"
+            bind:value={$data.user.password}
+			minlength="8"
+			required
+		/>
+	</label>
+	<label for="comfirmPassword">
+		Confirm Password:
+		<input
+			class={`error rounded`}
+			type="password"
+			name="confirmPassword"
+			id="confirmPassword"
+            bind:value={$data.user.confirmPassword}
+			minlength="8"
+			required
+		/>
+	</label>
+	<label for="email">
+		Email:
+		<input
+			class="error rounded"
+			type="email"
+			name="email"
+            bind:value={$data.user.email}
+			id="email"
+			required
+		/>
+	</label>
+
+	<AuthBtn action={"Register"} />
+</form>
+<HasAccount />
