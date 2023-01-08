@@ -1,6 +1,6 @@
 import { Injectable } from '@nestjs/common';
 import { InjectModel } from '@nestjs/mongoose';
-import mongoose, { Model } from 'mongoose';
+import { Model } from 'mongoose';
 import { Invoice, InvoiceDocument } from 'src/invoices/schema/invoice.schema';
 import { CreateInvoiceDto, UpdateInvoiceDto } from './dto/invoice.dto';
 import { IInvoice } from './interfaces/invoice.interface';
@@ -12,8 +12,6 @@ export class InvoicesService {
   ) {}
 
   async create(createInvoiceDto: CreateInvoiceDto): Promise<IInvoice> {
-    console.log(mongoose.connection.readyState);
-
     const createInvoice = await this.invoiceModel.create(createInvoiceDto);
     return createInvoice;
   }
@@ -35,7 +33,7 @@ export class InvoicesService {
       updateInvoiceDto,
       function (err, doc) {
         if (err) return console.log(err.message);
-        return console.log(`success`);
+        return console.log(`success updated invoice.`);
       },
     );
   }

@@ -5,7 +5,7 @@ export default {
     '/auth': wrap({
         asyncComponent:()=> import('./routes/Auth/Auth.svelte')
     }),
-    '/invoice/': wrap({
+    '/': wrap({
         asyncComponent: ()=> import('./routes/Invoice/Invoices.svelte')
     }),
     '/invoice/new': wrap({

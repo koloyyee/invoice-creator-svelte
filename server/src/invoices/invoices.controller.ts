@@ -13,28 +13,28 @@ import { InvoicesService } from './invoices.service';
 
 @Controller('invoices')
 export class InvoicesController {
-  constructor(private invoiceService: InvoicesService) {}
+  constructor(private invoicesService: InvoicesService) {}
 
   @Get()
   async findAll(): Promise<IInvoice[]> {
-    return this.invoiceService.findAll();
+    return this.invoicesService.findAll();
   }
 
   @Get(':invoiceId')
   async findOne(@Param() params): Promise<IInvoice> {
-    return this.invoiceService.findOne(params.invoiceId);
+    return this.invoicesService.findOne(params.invoiceId);
   }
 
   @Post()
   async create(@Body() createInvoiceDto: CreateInvoiceDto) {
     if (!createInvoiceDto) return;
-    return this.invoiceService.create(createInvoiceDto);
+    return this.invoicesService.create(createInvoiceDto);
   }
 
   @Patch(':invoiceId')
   async update(@Param() params, @Body() updateInvoiceDto: UpdateInvoiceDto) {
     if (!updateInvoiceDto) return;
-    return this.invoiceService.updateOne(params.invoiceId, updateInvoiceDto);
+    return this.invoicesService.updateOne(params.invoiceId, updateInvoiceDto);
   }
 
   // @Patch('')
@@ -44,6 +44,6 @@ export class InvoicesController {
 
   @Delete(':invoiceId')
   async delete(@Param() params) {
-    return this.invoiceService.deleteOne(params.invoiceId);
+    return this.invoicesService.deleteOne(params.invoiceId);
   }
 }

@@ -1,19 +1,19 @@
 <script lang="ts">
-	import BlueBtn from "../../components/Buttons/BlueBtn.svelte";
-	import GreenBtn from "../../components/Buttons/GreenBtn.svelte";
+	import BlueBtn from "../../lib/components/Buttons/BlueBtn.svelte";
+	import GreenBtn from "../../lib/components/Buttons/GreenBtn.svelte";
       
-      import ClientInfo from "../../components/Form/ClientInfo.svelte";
-      import Dates from "../../components/Form/Dates.svelte";
-      import IssuerInfo from "../../components/Form/IssuerInfo.svelte";
-      import Note from "../../components/Form/Note.svelte";
-      import ClientInfoPreview from "../../components/Preview/ClientInfo.svelte";
-      import Issuer from "../../components/Preview/Issuer.svelte";
-      import NotePreview from "../../components/Preview/Note.svelte";
-      import TotalAmount from "../../components/Preview/TotalAmount.svelte";
-      import ItemInputs from "../../components/Table/ItemInputs.svelte";
-      import ItemTable from "../../components/Table/ItemTable.svelte";
-      import { additionalNote } from "../../store";
-      import { invoice } from "../../utils/emptyState";
+      import ClientInfo from "../../lib/components/Invoice/ClientInfo.svelte";
+      import Dates from "../../lib/components/Invoice/Dates.svelte";
+      import IssuerInfo from "../../lib/components/Invoice/IssuerInfo.svelte";
+      import Note from "../../lib/components/Invoice/Note.svelte";
+      import ClientInfoPreview from "../../lib/components/Preview/ClientInfo.svelte";
+      import Issuer from "../../lib/components/Preview/Issuer.svelte";
+      import NotePreview from "../../lib/components/Preview/Note.svelte";
+      import TotalAmount from "../../lib/components/Preview/TotalAmount.svelte";
+      import ItemInputs from "../../lib/components/Table/ItemInputs.svelte";
+      import ItemTable from "../../lib/components/Table/ItemTable.svelte";
+      import { additionalNote } from "../../lib/stores/invoice/additionalNote";
+      import { invoice } from "../../lib/util/emptyState";
     
     // Issuer's info value
     let {

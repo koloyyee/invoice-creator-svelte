@@ -1,11 +1,11 @@
 <script lang='ts'>
 
-	import ClientInfo from "../../components/Form/ClientInfo.svelte";
-	import Date from "../../components/Form/Dates.svelte";
-	import IssuerInfo from "../../components/Form/IssuerInfo.svelte";
-	import Note from "../../components/Form/Note.svelte";
-	import ItemInputs from "../../components/Table/ItemInputs.svelte";
-	import type { IInvoice } from "../../interfaces/invoice.interface";
+	import ClientInfo from "../../lib/components/Invoice/ClientInfo.svelte";
+	import Date from "../../lib/components/Invoice/Dates.svelte";
+	import IssuerInfo from "../../lib/components/Invoice/IssuerInfo.svelte";
+	import Note from "../../lib/components/Invoice/Note.svelte";
+	import ItemInputs from "../../lib/components/Table/ItemInputs.svelte";
+	import type { IInvoice } from "../../lib/interfaces/invoice.interface";
     
 
 

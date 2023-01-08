@@ -1,11 +1,12 @@
 
 <script lang='ts'>
 	import { onMount } from "svelte";
-	import BlueBtn from "../../components/Buttons/BlueBtn.svelte";
-	import GreenBtn from "../../components/Buttons/GreenBtn.svelte";
-	import RedBtn from "../../components/Buttons/RedBtn.svelte";
-	import type { IInvoice } from "../../interfaces/invoice.interface";
-	import { additionalNote } from "../../store";
+	import BlueBtn from "../../lib/components/Buttons/BlueBtn.svelte";
+	import GreenBtn from "../../lib/components/Buttons/GreenBtn.svelte";
+	import RedBtn from "../../lib/components/Buttons/RedBtn.svelte";
+	import type { IInvoice } from "../../lib/interfaces/invoice.interface";
+	import { additionalNote } from "../../lib/stores/invoice";
+
 	import Form from "./Form.svelte";
 	import PreviewInvoice from "./PreviewInvoice.svelte";
 

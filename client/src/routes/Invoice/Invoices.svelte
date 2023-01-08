@@ -1,15 +1,22 @@
 <script lang='ts'>
-	import { createSvelteTable, flexRender, getCoreRowModel, getSortedRowModel, type ColumnDef, type Table, type TableOptions } from "@tanstack/svelte-table";
-	import { writable, type Readable } from "svelte/store";
 
   
-  import type { IInvoice } from "../../interfaces/invoice.interface";
+	import { createSvelteTable, flexRender, getCoreRowModel, getSortedRowModel, type ColumnDef, type TableOptions } from "@tanstack/svelte-table";
+	import { onMount } from "svelte";
+	import { writable } from "svelte/store";
+	import type { IInvoice } from "../../lib/interfaces/invoice.interface";
+	import { invoices } from "../../lib/stores/invoice/table";
 
-  let table: Readable<Table<IInvoice>>;
 
-  const fetchInvoices = async () => {
-        const res = await fetch(`${import.meta.env.VITE_BACKEND_API}/invoices`)
-        const defaultData = await res.json()
+  onMount(async ()=> {
+    const res = await fetch(`${import.meta.env.VITE_BACKEND_API}/invoices`)
+    const data: IInvoice[] = await res.json()
+    
+    invoices.update(value => value = data)
+    
+  })
+  
+  console.log($invoices)
 
         const defaultColumns: ColumnDef<IInvoice>[] = [
       {
@@ -72,7 +79,7 @@
       }
   
       const options  = writable<TableOptions<IInvoice>>({
-          data: defaultData,
+          data: $invoices,
           columns: defaultColumns,
           state: {
             sorting
@@ -83,22 +90,12 @@
           debugTable: true,
       })
 
-       table = createSvelteTable(options);
-        const paid = defaultData.filter(value => value.status === 'Paid').length
-        const notPaid = defaultData.filter(value => value.status === 'Not paid').length
-        const voided = defaultData.filter(value => value.status === 'Void').length
+        const table = createSvelteTable(options);
+        const paid = $invoices.filter(value => value.status === 'Paid').length
+        const notPaid = $invoices.filter(value => value.status === 'Not paid').length
+        const voided = $invoices.filter(value => value.status === 'Void').length
 
-        console.log(paid, notPaid, voided)
-
-       return $table;
-    }
-
-
-    let getInvoices = fetchInvoices();
   </script>
-{#await getInvoices }
-  ...loading...
-{:then $table}
 <section class='grid font-extrabold text-3xl pt-10 h-screen grid-rows-[repeat(12,_1fr)] gap-5'> 
     <h1 class=''> Invoice Records</h1>
 <div class='block w-full'>
@@ -149,4 +146,3 @@
     </table>
   </div>
 </section>
-{/await}

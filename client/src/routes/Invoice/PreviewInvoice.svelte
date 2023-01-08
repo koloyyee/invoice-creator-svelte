@@ -1,11 +1,11 @@
 <script lang="ts">
 
-	import ClientInfo from '../../components/Preview/ClientInfo.svelte';
-	import Issuer from "../../components/Preview/Issuer.svelte";
-	import Note from "../../components/Preview/Note.svelte";
-	import TotalAmount from "../../components/Preview/TotalAmount.svelte";
-	import ItemTable from "../../components/Table/ItemTable.svelte";
-	import type { IInvoice } from "../../interfaces/invoice.interface";
+	import ClientInfo from '../../lib/components/Preview/ClientInfo.svelte';
+	import Issuer from "../../lib/components/Preview/Issuer.svelte";
+	import Note from "../../lib/components/Preview/Note.svelte";
+	import TotalAmount from "../../lib/components/Preview/TotalAmount.svelte";
+	import ItemTable from "../../lib/components/Table/ItemTable.svelte";
+	import type { IInvoice } from "../../lib/interfaces/invoice.interface";
 
     export let invoice:IInvoice;
 

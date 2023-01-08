@@ -2,18 +2,17 @@
 
   
 	import Router from "svelte-spa-router";
-	import Menu from "./components/Nav/Menu.svelte";
+	import Menu from "./lib/components/Nav/Menu.svelte";
+	import { isLoggedIn } from "./lib/stores/auth";
 	import routes from "./routes";
 	import Auth from "./routes/Auth/Auth.svelte";
-	import { isLoggedIn } from "./store";
 
-	let isIn:boolean;
-	isLoggedIn.subscribe( auth => isIn = auth )
+
 
   </script>
 
 <body class="flex">
-	{#if isIn}
+	{#if $isLoggedIn}
 	<Menu />
 	<main class="sm:grid lg:grid grid-cols-2 ">
 		<Router {routes}/>

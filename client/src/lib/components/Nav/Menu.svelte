@@ -40,7 +40,7 @@ w-48
             New Invoice
         </li>
     </a>
-    <a href="/invoice" use:link>
+    <a href="/" use:link>
         <li > 
             <span class='menu-icons'><MdLibraryBooks /></span>
             Records
