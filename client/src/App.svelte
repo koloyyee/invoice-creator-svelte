@@ -3,7 +3,7 @@
   
 	import Router from "svelte-spa-router";
 	import Menu from "./lib/components/Nav/Menu.svelte";
-	import { isLoggedIn } from "./lib/stores/auth";
+	import { isAuthenticated } from "./lib/stores/auth";
 	import routes from "./routes";
 	import Auth from "./routes/Auth/Auth.svelte";
 
@@ -12,7 +12,7 @@
   </script>
 
 <body class="flex">
-	{#if $isLoggedIn}
+	{#if $isAuthenticated}
 	<Menu />
 	<main class="sm:grid lg:grid grid-cols-2 ">
 		<Router {routes}/>

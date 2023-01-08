@@ -10,7 +10,6 @@ import { logger } from './logger.middleware';
 import { UsersModule } from './users/users.module';
 
 dotenv.config();
-console.log(process.env.DB_CONN_STRING);
 
 @Module({
   imports: [

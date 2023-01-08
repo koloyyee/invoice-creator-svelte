@@ -24,7 +24,6 @@ export class UsersService {
    * @returns {IUser}: user with correct username
    */
   async findOne(username: string): Promise<IUser> {
-    console.log(username);
     return this.userModel.findOne({ username: username }).exec();
   }
 

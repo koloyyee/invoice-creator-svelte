@@ -20,20 +20,16 @@ export class UsersController {
   async create(@Body() createUserDto: CreateUserDto) {
     if (!createUserDto) return;
 
-    const hashed = await bcrypt.hash('password', 10);
-    const isValid = await bcrypt.compare('password', hashed);
-    console.log(isValid);
-
-    // const saltOrRound = 10;
-    // const hashedPassword = await bcrypt.hash(
-    //   createUserDto.password,
-    //   saltOrRound,
-    // );
-    // const body: CreateUserDto = {
-    //   ...createUserDto,
-    //   password: hashedPassword,
-    // };
-    // return this.usersService.create(body);
+    const saltOrRound = 10;
+    const hashedPassword = await bcrypt.hash(
+      createUserDto.password,
+      saltOrRound,
+    );
+    const body: CreateUserDto = {
+      ...createUserDto,
+      password: hashedPassword,
+    };
+    return this.usersService.create(body);
   }
 
   @Get(':username')

@@ -4,12 +4,18 @@
 	import MdExitToApp from 'svelte-icons/md/MdExitToApp.svelte';
 	import MdLibraryBooks from 'svelte-icons/md/MdLibraryBooks.svelte';
 
-	import { link } from "svelte-spa-router";
+	import { link, push } from "svelte-spa-router";
+	import { isAuthenticated } from '../../stores/auth';
 	import MobileMenu from '../Buttons/MobileMenu.svelte';
 
     export function toggleMenu(){
         const nav = document.querySelector('nav')
         nav.classList.toggle('hidden')
+    }
+
+    function logout(){
+        isAuthenticated.set(false)
+        push('/auth')
     }
 </script>
 
@@ -46,7 +52,7 @@ w-48
             Records
         </li>
     </a>
-    <a class='justify-self-end' href="/auth" use:link>
+    <a class='justify-self-end' on:click={logout}>
         <li > 
             <span class='menu-icons exit '><MdExitToApp /></span>
             Logout

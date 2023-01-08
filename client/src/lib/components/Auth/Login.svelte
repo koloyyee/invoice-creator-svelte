@@ -1,13 +1,39 @@
 <script>
     import { createForm } from 'felte';
+    import { push } from 'svelte-spa-router';
+    import { isAuthenticated } from '../../stores/auth';
     import AuthBtn from '../Buttons/AuthBtn.svelte';
     import HasAccount from './HasAccount.svelte';
 
-    
 
     const {form, errors, data} = createForm ({
-        onSubmit: (values) =>{
-            // post to backend auth
+        onSubmit: async (values) =>{
+
+            const res = await fetch(`${import.meta.env.VITE_BACKEND_API}/auth/login`, {
+                method: "POST",
+                headers: {
+                    "Content-type" : "application/json"
+                },
+                body: JSON.stringify(values)
+
+            })
+            const tokenObj = await res.json();
+            if (tokenObj) {
+
+                isAuthenticated.set(true)
+                push('/')
+            }
+
+
+            // const profile = await fetch (`${BACKEND}/profile`, {
+            //     method: "POST",
+            //     headers : {
+            //         "Authorization" : `Bearer ${tokenObj.access_token}`
+            //     }
+            // })
+            // console.log(values, profile, tokenObj)
+            // if(profile) return 
+            
         }
     })
 
